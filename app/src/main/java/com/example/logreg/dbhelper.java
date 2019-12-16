@@ -14,9 +14,9 @@ public class dbhelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "regisztracio";
     public static final String TABLE_NAME = "felhasznalo";
 
-    public static final String COL_1 = "id"; //COL_id
-    public static final String COL_2 = "email"; //COL_email
-    public static final String COL_3 = "felhnev"; //COL_felhnev
+    public static final String COL_1 = "id";
+    public static final String COL_2 = "email";
+    public static final String COL_3 = "felhnev";
     public static final String COL_4 = "jelszo";
     public static final String COL_5 = "teljesnev";
 
@@ -32,11 +32,7 @@ public class dbhelper extends SQLiteOpenHelper {
                         COL_3+ " TEXT NOT NULL UNIQUE, " +
                         COL_4+ " TEXT NOT NULl, " +
                         COL_5+ " TEXT NOT NULL)";
-        //az UNIQE-t lehet a végén is és kkor zárójelben felsorolni amit azzá akarunk tenni. pl UNIQUE(COL_2,COL_3)
         sqLiteDatabase.execSQL(createTables);
-//        vagy    sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME +
-//                " (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL UNIQUE, felhnev TEXT NOT NULL UNIQUE, jelszo TEXT NOT NULL, teljesnev TEXT NOT NULL)");
-
     }
 
     @Override
@@ -64,12 +60,6 @@ public class dbhelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
-    }
-    public Cursor adatLekerdezes()
-    {
-        SQLiteDatabase database = this.getWritableDatabase();
-        Cursor eredmeny = database.rawQuery("SELECT * from " + TABLE_NAME, null);
-        return eredmeny;
     }
     public Cursor felhasznaloEllenorzes(String email, String jelszo)
     {
@@ -115,21 +105,4 @@ public class dbhelper extends SQLiteOpenHelper {
         return "";
     }
 
-
-  //  public long adatTorles(int id){
-//        SQLiteDatabase database = this.getWritableDatabase();
-//        return database.delete(TABLE_NAME,COL_1+" = ?",new String[] {String.valueOf(id)});
-//    }
-
-//    public long adatModosit(String id, String email, String felhnev, String jelszo, String teljesnev){
-//        SQLiteDatabase database = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(COL_2, email);
-//        values.put(COL_3, felhnev);
-//        values.put(COL_4, jelszo);
-//        values.put(COL_5, teljesnev);
-//
-//        return database.update(TABLE_NAME, values, COL_1 + " = ?", new String[]{id});
-//    }
 }
